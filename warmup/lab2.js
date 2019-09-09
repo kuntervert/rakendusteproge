@@ -27,7 +27,13 @@ const mockItems = [
  * Task 1
  */
 const sumOfCost = items => {
-  return "implement"
+  let total = 0;
+  for (let i = 0; i < items.length; i++){
+    total = total + items[i].cost;
+  }
+
+  
+  return total
 };
 
 utils.test(sumOfCost(mockItems), 9594);
@@ -36,7 +42,14 @@ utils.test(sumOfCost(mockItems), 9594);
  * Task 2
  */
 const getPhones = items => {
-  return "implement me"
+  let phones = [];
+  for (let i=0; i<items.length; i++){
+    phones = items.filter(function(item) {
+     return item.category == "phone";
+   
+  })
+  }
+  return phones
 };
 
 utils.test(getPhones(mockItems).slice(-1)[0].name, "item19");
