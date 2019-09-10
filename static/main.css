@@ -38,7 +38,7 @@
       }
       .item__title{
       	color:#0C3A76;
-      	font-size: 13px;
+      	font-size: 25px;
       }
 
       .item__price{
@@ -47,4 +47,13 @@
       }
       .content a {
       	text-decoration: none;
+      }
+      .itemContainer .item__image{
+        width: 200px;
+      
+      }
+      .itemContainer{
+        box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.2);
+        width: 85%;
+        padding: 30px 20px;
       }
