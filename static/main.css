@@ -11,7 +11,8 @@
         margin-bottom: 50px;
       }
       .header__logo{
-        width: 50px;
+        width: 100px;
+        height: 65px;
       }
       .header__buttons{
         width: 200px;
