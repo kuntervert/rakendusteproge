@@ -6,9 +6,15 @@
   "dependencies": {
     "express": "^4.17.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "copy-webpack-plugin": "^5.0.4",
+    "webpack": "^4.41.0",
+    "webpack-cli": "^3.3.9"
+  },
   "scripts": {
-  	"start": "node server.js",
+    "start": "node server.js",
+    "build": "webpack",
+    "start:dev": "npm run build && npm run start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -20,5 +26,6 @@
   "bugs": {
     "url": "https://github.com/kuntervert/rakendusteproge/issues"
   },
-  "homepage": "https://github.com/kuntervert/rakendusteproge#readme"
+  "homepage": "https://github.com/kuntervert/rakendusteproge#readme",
+  "keywords": []
 }
