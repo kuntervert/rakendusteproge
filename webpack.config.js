@@ -5,18 +5,12 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
 mode: "production",
-  entry: './src/index.js',
+  entry: './src/index.jsx',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js'
   },
-  module: {
-    rules: [
-      { test: /\.js/,
-        // exclude: /node-modules/,
-        use: 'babel-loader' }
-    ]
-  },
+
     plugins: [
     new CleanWebpackPlugin(),
     new CopyPlugin([
@@ -24,6 +18,13 @@ mode: "production",
       }
     ]),
     ],
+  module: {
+    rules: [
+      { test: /\.(js|jsx)$/,
+        exclude: /node-modules/,
+        use: 'babel-loader' }
+    ]
+  },
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
     compress: true,
