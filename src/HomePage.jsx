@@ -9,7 +9,7 @@ class HomePage extends React.PureComponent{
         super(props);
         this.state = {
             items: phones,
-        }
+        };
     }
 
     handleChange(event){
@@ -28,7 +28,7 @@ class HomePage extends React.PureComponent{
                 break;
             }
         }
-    };
+    }
 
     render(){
         return (
@@ -43,8 +43,8 @@ class HomePage extends React.PureComponent{
                 </div>
 
             </>
-        )
+        );
     }
-};
+}
 
 export default HomePage;

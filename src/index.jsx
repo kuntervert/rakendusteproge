@@ -2,11 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom";
 import HomePage from "./HomePage.jsx";
 import ItemPage from "./ItemPage.jsx";
-import ItemList from "./ItemList.jsx";
 import {
     BrowserRouter,
-    Route,
-    Link } from 'react-router-dom';
+    Route} from "react-router-dom";
 
 const root = document.getElementById("app");
 

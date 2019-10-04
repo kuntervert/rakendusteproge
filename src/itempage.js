@@ -18,7 +18,7 @@ function setup(){
       titleElement.textContent = title;
       titleElement.className = "item__title";
 
-      const description = "A smartphone is a cellular telephone with an integrated computer and other features not originally associated with telephones, such as an operating system, web browsing and the ability to run software applications."
+      const description = "A smartphone is a cellular telephone with an integrated computer and other features not originally associated with telephones, such as an operating system, web browsing and the ability to run software applications.";
 
       const textElement = document.createElement("p");
       textElement.textContent = description;
