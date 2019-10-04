@@ -1,8 +1,11 @@
 import React from "react";
+import {Link} from "react-router-dom";
 const Header = () => {
     return (
         <div className="header">
-            <img className="header__logo" src="../images/evertlogo.png" />
+            <Link to={"/"}>
+                <img className="header__logo" src="../images/evertlogo.png" />
+            </Link>
             <div className="header__buttons">
                 <button>Login/Signup</button>
                 <button>Cart</button>

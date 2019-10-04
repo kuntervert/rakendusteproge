@@ -72,5 +72,10 @@ body {
 }
 
 .category-wrapper{
-    padding:25px;
+    text-align: center;
+
+}
+
+.options{
+    padding: 2px 55px;
 }
