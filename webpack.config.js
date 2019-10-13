@@ -38,6 +38,9 @@ mode: "production",
     contentBase: path.join(__dirname, 'dist'),
     compress: true,
     historyApiFallback: true,
-    port: 9000
+    port: 9000,
+    proxy: {
+      '/api': 'http://localhost:3000'
+    }
   }
 };
