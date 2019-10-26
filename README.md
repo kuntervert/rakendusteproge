@@ -2,4 +2,4 @@
 
 tere
 
-https://kunterevert.herokuapp.com/index.html
+https://kunterevert.herokuapp.com
