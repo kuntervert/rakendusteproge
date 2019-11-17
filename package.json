@@ -5,7 +5,9 @@
   "main": "lesson1.js",
   "dependencies": {
     "core-js": "^2.6.5",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "mongoose": "^5.7.11",
     "react": "^16.10.1",
     "react-dom": "^16.10.1",
     "react-router-dom": "^5.1.2"
