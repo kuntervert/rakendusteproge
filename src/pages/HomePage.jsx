@@ -1,8 +1,8 @@
 import React from "react";
 // import {laptops, phones} from "./mydatabase";
-import Header from "./Header.jsx";
-import ItemList from "./ItemList.jsx";
-import Checkbox from "./Checkbox.jsx";
+import Header from "../components/Header.jsx";
+import ItemList from "../components/ItemList.jsx";
+import Checkbox from "../components/Checkbox.jsx";
 
 class HomePage extends React.PureComponent{
 

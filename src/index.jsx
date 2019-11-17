@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import HomePage from "./HomePage.jsx";
-import ItemPage from "./ItemPage.jsx";
+import HomePage from "./pages/HomePage.jsx";
+import ItemPage from "./pages/ItemPage.jsx";
 import {
     BrowserRouter,
     Route} from "react-router-dom";
