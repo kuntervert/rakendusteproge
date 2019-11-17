@@ -13,7 +13,7 @@ const Header = () => {
             <div className="header__buttons">
                 <div className={"header__button"}>
                     <img src ={userIcon}></img>
-                    <div className={"header__button-text"}>Login/Signup</div>
+                    <div className={"header__button-text"}>Login <br></br>Signup</div>
                     </div>
                 <div className={"header__button"}>
                     <img src ={cartIcon}></img>
