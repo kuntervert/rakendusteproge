@@ -1,4 +1,4 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 //const DB = require("./database.js");
 const mongoose = require("mongoose");
@@ -58,7 +58,7 @@ router.get("/api/items", (req, res) => {
             return;
         }
         res.send(items);
-    })
+    });
     // res.json(DB.getItems())
 });
 
