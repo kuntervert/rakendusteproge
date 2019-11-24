@@ -12,8 +12,13 @@ const bodyParser = require("body-parser")
 
 const DB_URL = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASS}@epood-v0vxs.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`
 
-app.use(bodyParser.json());
+if(process.env.NODE_ENV !== "production"){
+  require("dotenv").config();
+}
 
+
+
+app.use(bodyParser.json());
 app.use(itemRouter);
 app.use(userRouter);
 

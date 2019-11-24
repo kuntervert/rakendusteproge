@@ -42,7 +42,7 @@ class SignupPage extends React.PureComponent {
                 <Header/>
                 <form onSubmit={this.handleSubmit}>
                     <div className="box">
-                        <h1>Login</h1>
+                        <h1>Signup</h1>
 
                         <input type="email"
                                name="email" placeholder={"Email"}
@@ -68,7 +68,7 @@ class SignupPage extends React.PureComponent {
                                onBlur="field_blur(this, 'password');"
                                className="password"/>
 
-                        <button className={"btn"}>Login</button>
+                        <button className={"btn"}>Signup</button>
                     </div>
 
 

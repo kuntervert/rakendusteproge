@@ -1,7 +1,8 @@
 import React from "react";
 import Header from "../components/Header.jsx";
 import "./loginform.css";
-import {Link} from "react-router-dom";
+
+
 class LoginPage extends React.PureComponent {
 
     constructor(props){
@@ -61,7 +62,6 @@ class LoginPage extends React.PureComponent {
                                className="password"/>
 
                         <button className={"btn"}>Login</button>
-                        <button className={"btn"}>Signup <Link to={"/signup"}></Link> </button>
                     </div>
 
 

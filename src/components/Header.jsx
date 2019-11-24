@@ -11,13 +11,20 @@ const Header = () => {
                 <img className="header__logo" src="../images/evertlogo.png" />
             </Link>
             <div className="header__buttons">
+
                 <Link className={"header__button"} to={"/login"}>
                     <img src ={userIcon}></img>
-                    <div className={"header__button-text"}>Login <br></br>Signup</div>
+                    <div className={"header__button-text"}>Login</div>
                     </Link>
+
+                <Link className={"header__button"} to={"/signup"}>
+                    <div className={"header__button-text"}><br></br>Signup</div>
+                    </Link>
+
                 <div className={"header__button"}>
                     <img src ={cartIcon}></img>
                     <div className={"header__button-text"}>Cart</div>
+                
                 </div>
             </div>
         </div>
