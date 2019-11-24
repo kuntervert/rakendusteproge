@@ -14,6 +14,8 @@ router.get("/api/users", (req, res) =>{
     });
 });
 
+
+//find if user with this email exists
 router.post("/api/users/login", (req, res) =>{
     User.findOne({email: req.body.email},(err, doc)=>{
         if(err) return handleError(err, res);
