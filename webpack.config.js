@@ -8,7 +8,8 @@ mode: "production",
   entry: './src/index.jsx',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    publicPath: '/'
   },
 
     plugins: [
@@ -20,6 +21,10 @@ mode: "production",
     ],
   module: {
     rules: [
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
+      },
       {
         enforce: "pre",
         test: /\.(js|jsx)$/,
@@ -39,6 +44,7 @@ mode: "production",
     compress: true,
     // historyApiFallback: true,
     port: 9000,
+    historyApiFallback: true,
     proxy: {
       '/api': 'http://localhost:3000'
     }
