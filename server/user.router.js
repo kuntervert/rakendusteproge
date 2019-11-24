@@ -16,7 +16,7 @@ router.get("/api/users", (req, res) =>{
 });
 
 
-//find if user with this email exists
+//find if user with this email exists (LOGIN)
 router.post("/api/users/login", (req, res) =>{
     User.login(req.body)
     .then( user =>{
@@ -26,11 +26,7 @@ router.post("/api/users/login", (req, res) =>{
         handleError(err, res);
     });
 });
-//     User.findOne({email: req.body.email},(err, doc)=>{
-//         if(err) return handleError(err, res);
-//         res.send(doc);
-//     } );
-// });
+
 
 
 //create user (signup)

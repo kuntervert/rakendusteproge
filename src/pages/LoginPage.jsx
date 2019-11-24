@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "../components/Header.jsx";
 import "./loginform.css";
-
+import {Link} from "react-router-dom";
 class LoginPage extends React.PureComponent {
 
     constructor(props){
@@ -15,6 +15,19 @@ class LoginPage extends React.PureComponent {
     handleSubmit = (event) =>{
         event.preventDefault();
         console.log("submit", this.state);
+        fetch("/api/users/login", {
+            method: "POST",
+            headers:{
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(this.state),
+        })
+        .then( res =>{
+            console.log("response", res);
+        })
+        .catch(err =>{
+            console.log("Error", err);
+        });
     };
 
     handleChange = (e) => {
@@ -48,6 +61,7 @@ class LoginPage extends React.PureComponent {
                                className="password"/>
 
                         <button className={"btn"}>Login</button>
+                        <button className={"btn"}>Signup <Link to={"/signup"}></Link> </button>
                     </div>
 
 

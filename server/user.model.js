@@ -13,6 +13,7 @@ userSchema.statics.login = function({email, password}){
     return new Promise( (resolve, reject) =>{
         this.findOne({email}, (err, doc)=>{
             if(err) return reject(err);
+            if(doc === null) return reject("user not found");
             bcrypt.compare(password, doc.hash, function(err, result){
                 if(err) return reject(err);
                 resolve(result);
