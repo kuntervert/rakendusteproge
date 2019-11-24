@@ -5,6 +5,7 @@ const PORT = process.env.PORT || 3000;
 const mongoose = require("mongoose");
 require('dotenv').config();
 const itemRouter = require("./item.router.js");
+const authRouter = require("./auth.router.js");
 const userRouter = require("./user.router.js");
 const DB = require("./database.js");
 const Item = require("./item.model.js");
@@ -19,8 +20,10 @@ if(process.env.NODE_ENV !== "production"){
 
 
 app.use(bodyParser.json());
-app.use(itemRouter);
-app.use(userRouter);
+
+app.use("/api/auth", authRouter);
+app.use("api/", itemRouter);
+app.use("api/", userRouter);
 
 app.get('/', (req, res) => res.sendFile(path.resolve(__dirname, "../dist", "index.html")));
 

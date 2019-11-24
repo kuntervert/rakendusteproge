@@ -5,8 +5,9 @@ const mongoose = require("mongoose");
 const User = require("./user.model.js");
 const bcrypt = require("bcryptjs");
 
-// get all users
 
+
+// get all users
 
 router.get("/api/users", (req, res) =>{
     User.find({}, (err, docs) =>{
