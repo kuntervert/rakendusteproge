@@ -7,7 +7,7 @@ const Item = require("./item.model.js");
 // DELETE ITEM IN DB
 
 
-router.delete("/api/items/:itemId", (req, res) =>{
+router.delete("/items/:itemId", (req, res) =>{
     Item.deleteOne({"_id" : mongoose.Types.ObjectId(req.params.itemId)}, (err)=>{
         if(err) return res.send(500);
         console.log("Successful delete!");
@@ -18,7 +18,7 @@ router.delete("/api/items/:itemId", (req, res) =>{
 
 // UUE ASJA LOOMINE //
 
-router.post("/api/items", (req, res) => {
+router.post("/items", (req, res) => {
     const props = {
         imgSrc: "google.ee",
         title: "phone red",
@@ -38,7 +38,7 @@ router.post("/api/items", (req, res) => {
 });
 
 // GET OTSPUNKT TOOTELE //
-router.get("/api/items/:itemId", (req, res) => {
+router.get("/items/:itemId", (req, res) => {
     Item.findById(req.params.itemId, function (err, item) {
         if (err) {
             console.log("Error:", err);
@@ -50,7 +50,7 @@ router.get("/api/items/:itemId", (req, res) => {
 });
 
 
-router.get("/api/items", (req, res) => {
+router.get("/items", (req, res) => {
     Item.find({}, function(err, items){
         if(err){
             console.log("Error:", err);

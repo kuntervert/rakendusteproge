@@ -1,8 +1,13 @@
 import React from "react";
-import Header from "../components/Header.jsx";
 import "./signupform.css";
+import PropTypes from "prop-types";
 
 class SignupPage extends React.PureComponent {
+
+    static propTypes = {
+        history: PropTypes.object.isRequired,
+    };
+
     constructor(props){
         super(props);
         this.state = {
@@ -15,15 +20,17 @@ class SignupPage extends React.PureComponent {
     handleSubmit = (event) =>{
         event.preventDefault();
         console.log("submit", this.state);
-        fetch("/api/users/signup", {
+        fetch("/api/auth/signup", {
             method: "POST",
             headers:{
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(this.state),
         })
-        .then( res =>{
-            console.log("response", res);
+        .then( res => res.json())
+        .then( data =>{
+            console.log("data", data);
+            this.props.history.push("/login");
         })
         .catch(err =>{
             console.log("Error", err);
@@ -39,36 +46,30 @@ class SignupPage extends React.PureComponent {
     render(){
         return (
             <>
-                <Header/>
+                <div><h1 style={{textAlign: "center"}}>Signup</h1></div>
                 <form onSubmit={this.handleSubmit}>
                     <div className="box">
-                        <h1>Signup</h1>
+                        <h1>Create account</h1>
 
                         <input type="email"
                                name="email" placeholder={"Email"}
                                value={this.state.email}
                                onChange={this.handleChange}
-                               onFocus="field_focus(this, 'email');"
-                               onBlur="field_blur(this, 'email');"
                                className="email"/>
 
                         <input type="password"
                                name="password" placeholder={"Set password"}
                                value={this.state.password}
                                onChange={this.handleChange}
-                               onFocus="field_focus(this, 'email');"
-                               onBlur="field_blur(this, 'password');"
                                className="password"/>
 
                         <input type="password"
                                name="confirmPassword" placeholder={"Re-enter password"}
                                value={this.state.confirmPassword}
                                onChange={this.handleChange}
-                               onFocus="field_focus(this, 'email');"
-                               onBlur="field_blur(this, 'password');"
                                className="password"/>
 
-                        <button className={"btn"}>Signup</button>
+                        <button className={"btn"}>Create</button>
                     </div>
 
 

@@ -22,7 +22,7 @@ if(process.env.NODE_ENV !== "production"){
 app.use(bodyParser.json());
 
 app.use("/api/auth", authRouter);
-app.use("api/", itemRouter);
+app.use("/api/", itemRouter);
 app.use("api/users/", userRouter);
 
 app.get('/', (req, res) => res.sendFile(path.resolve(__dirname, "../dist", "index.html")));

@@ -1,6 +1,6 @@
 import React from "react";
 // import {laptops, phones} from "./mydatabase";
-import Header from "../components/Header.jsx";
+
 import ItemList from "../components/ItemList.jsx";
 import Checkbox from "../components/Checkbox.jsx";
 
@@ -63,7 +63,6 @@ render(){
       console.log("this state", this.state);
         return (
             <>
-            <Header/>
             {
                 this.state.allCategories.map(categoryName => {
                     return (
