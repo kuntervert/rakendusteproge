@@ -2,6 +2,9 @@ const express = require("express");
 const router = express.Router();    
 const { check, validationResult } = require("express-validator");
 const userController = require("./user.controller.js");
+const jwt = require("jsonwebtoken");
+
+const JWT_PRIVATE_KEY="salajaneprivaatnekey";
 
 const validationMiddleware = (req, res, next) => {
     const errors = validationResult(req);
@@ -10,6 +13,22 @@ const validationMiddleware = (req, res, next) => {
     }
     next();
 };
+
+
+router.post("/verify", (req, res) =>{
+    const bearerHeader = req.headers["authorization"];
+    if(!bearerHeader) return res.send(400);
+    const token = bearerHeader.split(" ")[1];
+    if(!token) return res.send(400);
+    jwt.verify( token,JWT_PRIVATE_KEY, (err, decoded) => {
+        if(err){
+            console.log(err);
+            return res.status(400).send(err);
+        }
+        res.status(200).send(decoded);
+    });      
+});
+
 
 //(LOGIN) find if user with this email exists 
 router.post("/login", userController.login);
