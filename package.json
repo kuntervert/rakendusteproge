@@ -10,6 +10,8 @@
     "core-js": "^2.6.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-validator": "^6.3.0",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.7.11",
     "python2": "0.0.1",
     "react": "^16.10.1",

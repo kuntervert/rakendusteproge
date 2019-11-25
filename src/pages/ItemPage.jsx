@@ -1,5 +1,4 @@
 import React from "react";
-import Header from "../components/Header.jsx";
 // import {phones} from "./mydatabase.js";
 import PropTypes from "prop-types";
 
@@ -36,7 +35,6 @@ class ItemPage extends React.PureComponent{
         console.log("itemID", this.props.match.params.itemId);
         return (
             <>
-                <Header/>
                 <div className="itemContainer">
                     <img src={this.state.imgSrc}/>
                     <div className={"item__title"}>{this.state.title}</div>
