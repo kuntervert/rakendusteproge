@@ -4,32 +4,35 @@ import {userIcon} from "../icons";
 import {cartIcon} from "../icons";
 import "./header.css";
 import PropTypes from "prop-types";
+import {dataContext} from "../index.jsx";
 
-const Header = ({ user }) => {
+const Header = () => {
     return (
-        <div className="header">
-            <Link to={"/"}>
-                <img className="header__logo" src="../images/evertlogo.png" />
-            </Link>
-            <div className="header__buttons">
-
-                {user.email && <WelcomeIcon user={user} />}
-                {!user.email && <LoginRegisterIcon />}
-                {!user.email && <LoginRegisterIcon2 />}
-
-                <div className={"header__button"}>
-                    <img src={cartIcon}></img>
-                    <div className={"header__button-text"}>Cart</div>
-
+        <dataContext.Consumer>
+        {
+            (contextValue) =>(
+                <div className="header">
+                <Link to={"/"}>
+                    <img className="header__logo" src="../images/evertlogo.png" />
+                </Link>
+                <div className="header__buttons">
+        
+                    {contextValue.user.email && <WelcomeIcon user={contextValue.user} />}
+                    {!contextValue.user.email && <LoginRegisterIcon />}
+                    {!contextValue.user.email && <LoginRegisterIcon2 />}
+        
+                    <div className={"header__button"}>
+                        <img src={cartIcon}></img>
+                        <div className={"header__button-text"}>Cart</div>
+        
+                    </div>
                 </div>
             </div>
-        </div>
-    );
-};
+            )
+            }
+        </dataContext.Consumer>
 
-Header.propTypes = {
-    token: PropTypes.string,
-    user: PropTypes.object
+    );
 };
 
 const LoginRegisterIcon = () =>(

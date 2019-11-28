@@ -9,15 +9,18 @@ import SignupPage from "./pages/SignupPage.jsx";
 import UserPage from "./pages/UserPage.jsx";
 import NotFound from "./pages/NotFound.jsx";
 
-class App extends React.Component{
-    state = {
-        token: null,
+const dataDefaultValue = {
+    token: null,
         user: {
             email: null,
             _id: null,
             createdAt: null,
         },
     };
+export const dataContext = React.createContext(dataDefaultValue);
+
+class App extends React.Component{
+    state = dataDefaultValue;
 
     handleLogin = ({token, user}) => {
         this.setState({
@@ -28,14 +31,9 @@ class App extends React.Component{
 
     render(){
         return(
+            <dataContext.Provider value={this.state}>
             <BrowserRouter>
-                        <Route
-             path={"/"}
-             render= { (props) =>
-              <Header {...props} 
-              token={this.state.token}
-              user={this.state.user}
-              />} />
+            <Route path={"/"} component={Header} />
             <Switch>
 
             <Route path="/"
@@ -44,7 +42,7 @@ class App extends React.Component{
             <Route path="/items/:itemId" 
             exact component={ItemPage}/>
 
-            <Route component={NotFound}/>
+            
 
             <Route path="/login" 
             exact render={(props) => <LoginPage {...props} onLogin={this.handleLogin}/>}/>
@@ -58,10 +56,13 @@ class App extends React.Component{
                 return <UserPage{...props} user={this.state.user}/>;
             }}
             />
+            <Route component={NotFound}/>
         </Switch>
         </BrowserRouter>
+        </dataContext.Provider>
         );
     }
+            
 }
 
 const root = document.getElementById("app");
