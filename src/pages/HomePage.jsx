@@ -35,22 +35,27 @@ class HomePage extends React.PureComponent{
               console.log("err", err);
           });
     };
-handleDropdown = (event) => {
-    console.log(event.target.value, event.target.name);
-    if(this.isSelected(event.target.name)){
-        const clone = this.state.selectedCategories.slice();
-        const index = this.state.selectedCategories.indexOf(event.target.name);
-        clone.splice(index, 1);
-        this.setState({
-            selectedCategories: clone
-        });
+handleFilterSelect = (event) => {
+    const categoryName = event.target.name;
+    if(this.isSelected(categoryName)) {
+     return this.unselectCategory(categoryName);
     }
-    else{
+        this.selectCategory(categoryName);
+    };
+
+    selectCategory = (categoryName) => {
         this.setState({
-            selectedCategories: this.state.selectedCategories.concat([event.target.name])
+            selectedCategories: this.state.selectedCategories.concat([categoryName])
         });
-}
-};
+    };
+
+    unselectCategory = (categoryName) => {
+        const newArray = this.state.selectedCategories.filter( cn => cn !== categoryName);
+
+        this.setState({
+            selectedCategories: newArray
+        });
+    };
 
     getSelectedItems = () => {
       return this.state.items.filter( item => this.isSelected(item.category));
@@ -69,7 +74,7 @@ render(){
                         <Checkbox
                             key = {categoryName}
                             name = {categoryName}
-                            onChange = {this.handleDropdown}
+                            onChange = {this.handleFilterSelect}
                             checked = {this.isSelected(categoryName)}
                             />
                     );
@@ -81,5 +86,6 @@ render(){
         );
     }
 }
+
 
 export default HomePage;
