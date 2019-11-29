@@ -4,22 +4,19 @@ import {userIcon} from "../icons";
 import {cartIcon} from "../icons";
 import "./header.css";
 import PropTypes from "prop-types";
-import {dataContext} from "../index.jsx";
+import dataConsumer from "./dataConsumer.jsx";
 
-const Header = () => {
+const Header = ({user}) => {
     return (
-        <dataContext.Consumer>
-        {
-            (contextValue) =>(
                 <div className="header">
                 <Link to={"/"}>
                     <img className="header__logo" src="../images/evertlogo.png" />
                 </Link>
                 <div className="header__buttons">
         
-                    {contextValue.user.email && <WelcomeIcon user={contextValue.user} />}
-                    {!contextValue.user.email && <LoginRegisterIcon />}
-                    {!contextValue.user.email && <LoginRegisterIcon2 />}
+                    {user.email && <WelcomeIcon user={user} />}
+                    {!user.email && <LoginRegisterIcon />}
+                    {!user.email && <LoginRegisterIcon2 />}
         
                     <div className={"header__button"}>
                         <img src={cartIcon}></img>
@@ -28,12 +25,16 @@ const Header = () => {
                     </div>
                 </div>
             </div>
-            )
-            }
-        </dataContext.Consumer>
-
+            
+            
     );
 };
+
+Header.propTypes = {
+    token: PropTypes.string,
+    user: PropTypes.object,
+};
+
 
 const LoginRegisterIcon = () =>(
     <Link className={"header__button"} to={"/login"}>
@@ -56,4 +57,4 @@ WelcomeIcon.propTypes = {
     user: PropTypes.object.isRequired
 };
 
-export default Header;
+export default dataConsumer(Header);
