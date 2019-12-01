@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import dataConsumer from "../components/dataConsumer.jsx";
+import redirecter from "../components/redirecter.jsx";
 
 class UserPage extends React.PureComponent {
     static propTypes = {
@@ -18,4 +19,4 @@ class UserPage extends React.PureComponent {
     }
 }
 
-export default dataConsumer(UserPage);
+export default dataConsumer(redirecter(UserPage));
