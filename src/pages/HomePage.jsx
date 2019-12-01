@@ -22,11 +22,9 @@ class HomePage extends React.PureComponent{
     fetchItems = () => {
         fetch("/api/items")
           .then(res =>{
-              console.log("res", res);
               return res.json();
           })
           .then( items => {
-              console.log("items", items);
               this.setState({
                 items
               });
@@ -65,7 +63,6 @@ isSelected = (name) => this.state.selectedCategories.indexOf(name) >= 0;
 
 
 render(){
-      console.log("this state", this.state);
         return (
             <>
             {
