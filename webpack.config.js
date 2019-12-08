@@ -8,45 +8,55 @@ mode: "production",
   entry: './src/index.jsx',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js',
-    publicPath: '/'
+    filename: 'static/bundle.js'
+    
   },
 
-    plugins: [
+  plugins: [
     new CleanWebpackPlugin(),
     new CopyPlugin([
-      { from: "public"
+      {
+        from: "public/index.html",
       }
     ]),
-    ],
-  module: {
-    rules: [
+    new CopyPlugin([
       {
-        test: /\.css$/i,
-        use: ['style-loader', 'css-loader'],
-      },
-      {
-        enforce: "pre",
-        test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
-        loader: 'eslint-loader',
-        options: {
-          failOnError: true,
+        from: "public/images",
+        to: "static/images"
+      }
+    ])
+  ],
+module: {
+  rules: [
+    {
+      test: /\.css$/i,
+      use: ['style-loader', 'css-loader'],
+    },
+    {
+      test: /\.(woff|woff2)$/i,
+      use: [
+        {
+          loader: 'file-loader',
+          options:{
+            outputPath: "static/fonts"
+          }
         },
-      },
-      { test: /\.(js|jsx)$/,
-        exclude: /node-modules/,
-        use: 'babel-loader' }
-    ]
-  },
-  devServer: {
-    contentBase: path.join(__dirname, 'dist'),
-    compress: true,
-    // historyApiFallback: true,
-    port: 9000,
-    historyApiFallback: true,
-    proxy: {
-      '/api': 'http://localhost:3000'
+      ],
+    },
+    { 
+      test: /\.(js|jsx)$/,
+      exclude: /node_modules/,
+      use: 'babel-loader' 
     }
+  ]
+},
+devServer: {
+  contentBase: path.join(__dirname, 'dist'),
+  historyApiFallback: true,
+  compress: true,
+  port: 9000,
+  proxy: {
+    '/api': 'http://localhost:3000'
   }
+}
 };

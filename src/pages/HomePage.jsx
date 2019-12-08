@@ -1,85 +1,114 @@
 import React from "react";
-// import {laptops, phones} from "./mydatabase";
-
 import ItemList from "../components/ItemList.jsx";
 import Checkbox from "../components/Checkbox.jsx";
+import PropTypes from "prop-types";
+import "./homepage.css";
+import {connect} from "react-redux";
+import {getItems} from "../store/store.js";
+import {ItemProps} from "./ShoppingCart.jsx";
 
 class HomePage extends React.PureComponent{
 
-    constructor(props) {
+    static propTypes = {
+        dispatch: PropTypes.func.isRequired,
+        items: PropTypes.arrayOf(PropTypes.shape(ItemProps)).isRequired,
+    };
+
+    constructor(props){
         super(props);
         this.state = {
-            items:[] ,
+            sortDirection: -1,
             allCategories: ["phones", "laptops"],
             selectedCategories: ["phones"],
         };
     }
 
-    componentDidMount() {
-        this.fetchItems();
+    componentDidMount(){
+        this.props.dispatch(getItems());
     }
 
-    fetchItems = () => {
-        fetch("/api/items")
-          .then(res =>{
-              console.log("res", res);
-              return res.json();
-          })
-          .then( items => {
-              console.log("items", items);
-              this.setState({
-                items
-              });
-          })
-          .catch(err =>{
-              console.log("err", err);
-          });
-    };
-handleDropdown = (event) => {
-    console.log(event.target.value, event.target.name);
-    if(this.isSelected(event.target.name)){
-        const clone = this.state.selectedCategories.slice();
-        const index = this.state.selectedCategories.indexOf(event.target.name);
-        clone.splice(index, 1);
+
+    handleFilterSelect = (event) => {
+        const categoryName = event.target.name;
+        if(this.isSelected(categoryName)){
+            this.unselectCategory(categoryName);
+        }
+        else{
+            this.selectCategory(categoryName);
+        }
+    }
+
+    unselectCategory = (categoryName) => {
+        const newArr = this.state.selectedCategories.filter(cn => cn !== categoryName);
         this.setState({
-            selectedCategories: clone
+            selectedCategories: newArr
         });
     }
-    else{
+    
+    selectCategory = (categoryName) => {
         this.setState({
-            selectedCategories: this.state.selectedCategories.concat([event.target.name])
+            selectedCategories: this.state.selectedCategories.concat([categoryName])
         });
-}
-};
+    }
 
-    getSelectedItems = () => {
-      return this.state.items.filter( item => this.isSelected(item.category));
-    };
+    getVisibleItems = () => {
+        return this.props.items
+        .filter(item => this.isSelected(item.category))
+    }
 
-isSelected = (name) => this.state.selectedCategories.indexOf(name) >= 0;
+    isSelected = (name) => this.state.selectedCategories.indexOf(name) >= 0;
 
-
-render(){
-      console.log("this state", this.state);
+    render(){
+        const items = this.getVisibleItems();
         return (
             <>
-            {
-                this.state.allCategories.map(categoryName => {
-                    return (
-                        <Checkbox
-                            key = {categoryName}
-                            name = {categoryName}
-                            onChange = {this.handleDropdown}
-                            checked = {this.isSelected(categoryName)}
-                            />
-                    );
-                })
-            }
-                
-                <ItemList items={this.getSelectedItems()}/>  
+            <div className="body-wrapper">
+                <div className="filters-wrapper">
+                    <ItemFilters
+                    allCategories={this.state.allCategories}
+                    handleDropdown={this.handleFilterSelect}
+                    isSelected={this.isSelected}
+                    />
+                </div>
+                <div className="items-header-wrapper">
+                    <div>
+                        Found: {items.length} {" "}
+                        {this.state.selectedCategories.join(", ")}
+                    </div>
+                    
+                </div>
+                <ItemList items={items}/>
+            </div>
             </>
         );
     }
 }
-
-export default HomePage;
+const ItemFilters = ({allCategories, handleDropdown, isSelected}) => {
+    return (
+        <>
+        {
+            allCategories.map(categoryName => {
+                return (
+                    <Checkbox
+                    key={categoryName}
+                    name={categoryName}
+                    onChange={handleDropdown}
+                    checked={isSelected(categoryName)}
+                    />
+                );
+            })
+        }
+        </>
+    );
+};
+ItemFilters.propTypes = {
+    allCategories: PropTypes.array.isRequired,
+    handleDropdown: PropTypes.func.isRequired,
+    isSelected: PropTypes.func.isRequired,
+};
+const mapStateToProps = (store) =>{
+    return{
+        items: store.items,
+    };
+};
+export default connect(mapStateToProps)(HomePage);

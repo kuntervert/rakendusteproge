@@ -1,52 +1,82 @@
 import React from "react";
-// import {phones} from "./mydatabase.js";
 import PropTypes from "prop-types";
+import "./itempage.css";
+import FancyButton from "../components/FancyButton.jsx";
+import {connect} from "react-redux";
+import {addItem} from "../store/store.js";
+
 
 class ItemPage extends React.PureComponent{
+  
+  static propTypes = {
+    dispatch: PropTypes.func.isRequired,
+  };
 
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+    constructor(props){
+        super(props);
+        this.state = {};
+    }
 
-  componentDidMount() {
-    this.fetchItem();
-  }
+    componentDidMount() {
+        this.fetchItem();
+    }
 
-  fetchItem = () => {
-    fetch(`/api/items/${this.props.match.params.itemId}`)
-      .then( res => {
-        return res.json();
-      })
-      .then( item =>{
-        console.log("item", item);
-        this.setState({
-          ...item
+    fetchItem = () => {
+        fetch(`/api/items/${this.props.match.params.itemId}`)
+        .then(res =>{
+            return res.json();
+        })
+        .then(item =>{
+
+            this.setState({
+                ...item
+            });
+        })
+        .catch(err =>{
+            console.log("item page", err);
         });
-      })
-      .catch(err =>{
-        console.log("item page", err);
-      });
+    }
 
-}
+    handleBuy = () => {
+      this.props.dispatch(addItem(this.state));
+    };
+  
 
-  render(){
-        console.log("this.props", this.props);
-        console.log("itemID", this.props.match.params.itemId);
+    render(){
         return (
             <>
-                <div className="itemContainer">
-                    <img src={this.state.imgSrc}/>
-                    <div className={"item__title"}>{this.state.title}</div>
-                    <div className={"item__price"}>{this.state.price}</div>
-                </div>
+            <div className={"box spacer itemPage"}>
+             <div style={{
+               display: "flex",
+
+             }}>
+               <div className={"itemPage-left"}>
+                 <img src={this.state.imgSrc}/>
+               </div>
+               <div className={"itemPage-content"}>
+                 <div><h2>{this.state.title}</h2></div>
+                 <div>
+                   <p style={{textAlign: "justify"}} className={"text--bold"}>
+                     {this.state.price} €
+                   </p>
+                 </div>
+                 <div>
+                   <p style={{textAlign: "justify"}}>
+                     
+                   </p>
+                 </div>
+               </div>
+             </div>
+          <div className={"itemPage-footer"}>
+            <FancyButton onClick={this.handleBuy}>Lisa toode ostukorvi</FancyButton>
+          </div>
+        </div>
             </>
         );
     }
 }
 
 ItemPage.propTypes = {
-  match: PropTypes.object.isRequired,
+    match: PropTypes.object.isRequired,
 };
-
-export default ItemPage;
+export default connect()(ItemPage);

@@ -1,5 +1,5 @@
 import React from "react";
-
+import {Link} from "react-router-dom";
 import "./loginform.css";
 import PropTypes from "prop-types";
 
@@ -66,6 +66,11 @@ class LoginPage extends React.PureComponent {
                                className="password"/>
 
                         <button className={"btn"}>Login</button>
+                        <Link to="/signup">
+                        <button className={"btn"}>
+                            To signup
+                        </button>
+                         </Link>
                     </div>
 
 
