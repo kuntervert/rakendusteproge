@@ -4,7 +4,7 @@ import Checkbox from "../components/Checkbox.jsx";
 import PropTypes from "prop-types";
 import "./homepage.css";
 import {connect} from "react-redux";
-import {getItems} from "../store/store.js";
+import {getItems} from "../store/actions.js";
 import {ItemProps} from "./ShoppingCart.jsx";
 
 class HomePage extends React.PureComponent{

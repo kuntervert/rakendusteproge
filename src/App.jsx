@@ -4,8 +4,11 @@ import Header from "./components/Header.jsx";
 import Pages from "./pages/index.jsx";
 import "typeface-roboto";
 import "./pages/main.css";
-import store from "./store/store.js";
+import configureStore from "./store/configureStore.js";
 import {Provider} from "react-redux";
+import { PersistGate } from 'redux-persist/integration/react';
+
+const {store, persistor} = configureStore();
 
 class App extends React.Component{
     state = authDefaultValue;
@@ -20,11 +23,10 @@ class App extends React.Component{
     render(){
       return(
         <Provider store={store}>
+          <PersistGate loading={null} persistor={persistor}>
           <AuthContext.Provider value={this.state}>
           <BrowserRouter>
-  
             <Route path="/" component={Header}/>
-  
             <Switch>
             <Route path="/" exact component={Pages.HomePage} />
             <Route 
@@ -43,9 +45,9 @@ class App extends React.Component{
             <Route path="/checkout/cart" exact component={Pages.ShoppingCart}/>
             <Route component={Pages.NotFound}/>
             </Switch>
-            
           </BrowserRouter>
           </AuthContext.Provider>
+          </PersistGate>
         </Provider>
       );
     }
