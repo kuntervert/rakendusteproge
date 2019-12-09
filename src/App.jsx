@@ -6,7 +6,9 @@ import "typeface-roboto";
 import "./pages/main.css";
 import configureStore from "./store/configureStore.js";
 import {Provider} from "react-redux";
-import { PersistGate } from 'redux-persist/integration/react';
+import { PersistGate } from "redux-persist/integration/react";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const {store, persistor} = configureStore();
 
@@ -16,6 +18,7 @@ class App extends React.Component{
       return(
         <Provider store={store}>
           <PersistGate loading={null} persistor={persistor}>
+          <ToastContainer/>
           <BrowserRouter>
             <Route path="/" component={Header}/>
             <Switch>

@@ -1,6 +1,7 @@
 import React from "react";
 import "./signupform.css";
 import PropTypes from "prop-types";
+import {toast} from "react-toastify";
 
 class SignupPage extends React.PureComponent {
 
@@ -31,9 +32,11 @@ class SignupPage extends React.PureComponent {
         .then( data =>{
             console.log("data", data);
             this.props.history.push("/login");
+
         })
         .catch(err =>{
             console.log("Error", err);
+            toast.error("Signup failed", {position: "bottom-center"});
         });
     };
 
