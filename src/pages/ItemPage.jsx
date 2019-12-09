@@ -5,7 +5,7 @@ import FancyButton from "../components/FancyButton.jsx";
 import {connect} from "react-redux";
 import {addItem} from "../store/actions.js";
 import {toast} from "react-toastify";
-
+import * as services from "../services.js";
 
 class ItemPage extends React.PureComponent{
   
@@ -23,10 +23,7 @@ class ItemPage extends React.PureComponent{
     }
 
     fetchItem = () => {
-      fetch(`/api/v1/items/${this.props.match.params.itemId}`)
-        .then(res =>{
-            return res.json();
-        })
+      services.getItem({itemId: this.props.match.params.itemId})
         .then(item =>{
          
             this.setState({

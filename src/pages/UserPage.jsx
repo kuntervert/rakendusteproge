@@ -7,6 +7,8 @@ import {tokenUpdate} from "../store/actions.js";
 import {userUpdate} from "../store/actions.js";
 // import dataConsumer from "../components/dataConsumer.jsx";
 import redirecter from "../components/redirecter.jsx";
+import * as selectors from "../store/selectors.js";
+
 
 class UserPage extends React.PureComponent {
     static propTypes = {
@@ -36,7 +38,7 @@ class UserPage extends React.PureComponent {
 
 const mapStateToProps = (store) =>{
     return {
-        user: store.user,
+        user: selectors.getUser(store),
     };
 };
 
