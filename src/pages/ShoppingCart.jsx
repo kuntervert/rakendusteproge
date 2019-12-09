@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import FancyButton from "../components/FancyButton.jsx";
 import {connect} from "react-redux";
 import {removeItem} from "../store/actions";
-import {toast} from 'react-toastify';
+import {toast} from "react-toastify";
 
 
 class ShoppingCart extends React.PureComponent{

@@ -4,7 +4,7 @@ import "./itempage.css";
 import FancyButton from "../components/FancyButton.jsx";
 import {connect} from "react-redux";
 import {addItem} from "../store/actions.js";
-import {toast} from 'react-toastify';
+import {toast} from "react-toastify";
 
 
 class ItemPage extends React.PureComponent{
@@ -23,7 +23,7 @@ class ItemPage extends React.PureComponent{
     }
 
     fetchItem = () => {
-        fetch(`/api/items/${this.props.match.params.itemId}`)
+      fetch(`/api/v1/items/${this.props.match.params.itemId}`)
         .then(res =>{
             return res.json();
         })
