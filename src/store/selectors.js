@@ -6,8 +6,10 @@ export const getUser = (store) => {
     return store.user;
 };
 
+
 export const getCart = (store) => {
-    return store.cart;
+    if(!store.user) return [];
+    return store.user.cart;
 };
 
 export const getItems = (store) => {
