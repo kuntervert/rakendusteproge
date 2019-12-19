@@ -1,8 +1,10 @@
-.box{
-    border-radius: 4px;
-    padding: 15px;
+.box {
     background: white;
-    border: 1px solid #3333332b;
+    width: 300px;
+    border-radius: 6px;
+    margin: 0 auto 0 auto;
+    padding: 0px 0px 0px 0px;
+    border: #AEF3C8 4px solid;
 }
 
 .spacer {

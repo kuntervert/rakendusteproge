@@ -4,8 +4,10 @@ import Checkbox from "../components/Checkbox.jsx";
 import PropTypes from "prop-types";
 import "./homepage.css";
 import {connect} from "react-redux";
-import {getItems} from "../store/store.js";
+import {getItems} from "../store/actions.js";
 import {ItemProps} from "./ShoppingCart.jsx";
+import * as selectors from "../store/selectors.js";
+
 
 class HomePage extends React.PureComponent{
 
@@ -108,7 +110,7 @@ ItemFilters.propTypes = {
 };
 const mapStateToProps = (store) =>{
     return{
-        items: store.items,
+        items: selectors.getItems(store),
     };
 };
 export default connect(mapStateToProps)(HomePage);

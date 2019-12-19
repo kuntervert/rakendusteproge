@@ -1,6 +1,8 @@
 import React from "react";
 import "./signupform.css";
 import PropTypes from "prop-types";
+import {toast} from "react-toastify";
+import * as services from "../services.js";
 
 class SignupPage extends React.PureComponent {
 
@@ -20,22 +22,17 @@ class SignupPage extends React.PureComponent {
     handleSubmit = (event) =>{
         event.preventDefault();
         console.log("submit", this.state);
-        fetch("/api/auth/signup", {
-            method: "POST",
-            headers:{
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(this.state),
-        })
-        .then( res => res.json())
-        .then( data =>{
-            console.log("data", data);
-            this.props.history.push("/login");
-        })
-        .catch(err =>{
-            console.log("Error", err);
-        });
-    };
+            services.signup(this.state)
+            .then( data =>{
+                console.log("data", data);
+                this.props.history.push("/login");
+
+            })
+            .catch(err =>{
+                console.log("Error", err);
+                toast.error("Signup failed", {position: "bottom-center"});
+            });
+        };
 
     handleChange = (e) => {
         this.setState({
