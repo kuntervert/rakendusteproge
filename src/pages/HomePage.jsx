@@ -1,5 +1,6 @@
 import React from "react";
 import ItemList from "../components/ItemList.jsx";
+import SortDropdown from "../components/SortDropdown.jsx";
 import Checkbox from "../components/Checkbox.jsx";
 import PropTypes from "prop-types";
 import "./homepage.css";
@@ -56,7 +57,20 @@ class HomePage extends React.PureComponent{
     getVisibleItems = () => {
         return this.props.items
         .filter(item => this.isSelected(item.category))
+        .sort((a, b) => {
+            switch (this.state.sortDirection) {
+                case -1: return b.price -a.price;
+                case 1: return a.price -b.price;
+            }
+        });
     }
+
+    handleSortDropdown = (event) => {
+        this.setState({
+            sortDirection: parseInt(event.target.value),
+        });
+    }
+
 
     isSelected = (name) => this.state.selectedCategories.indexOf(name) >= 0;
 
@@ -70,6 +84,12 @@ class HomePage extends React.PureComponent{
                     allCategories={this.state.allCategories}
                     handleDropdown={this.handleFilterSelect}
                     isSelected={this.isSelected}
+                    />
+                </div>
+                <div className="dropdownitems">
+                    <SortDropdown
+                    direction={this.state.sortDirection}
+                    onChange={this.handleSortDropdown}
                     />
                 </div>
                 <div className="items-header-wrapper">

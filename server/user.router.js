@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const User = require("./user.model.js");
 const Item = require("./item.model.js");
+const mongoose = require("mongoose");
 const {authMiddleware} = require("./middlewares.js");
 
 router.param("userId", (req, res, next, userId) => {
@@ -60,6 +61,36 @@ router.get("/", (req, res) =>{
         res.status(200).json(docs);
     });
 });
+
+//UPDATE USER EMAIL
+
+router.post("/", (req, res) => {
+    const email = req.body.email;
+    const id = req.body._id
+    console.log(email, id)
+    User.findOne(
+        {"_id": id},
+        function(err, doc){
+            if(doc === null){
+                res.send(500)
+            }
+            if(err){
+                res.send(500)
+                console.log("update failed!");
+                return
+            }
+            doc.email = email
+            doc.save((err, doc) =>{
+                if(err){
+                    console.log(err)
+                    return res.send(500)
+                }
+                res.send(200)
+                console.log(doc);
+            })
+            
+        });
+    });
 
 // delete all users
 router.delete("/", (req, res) =>{
