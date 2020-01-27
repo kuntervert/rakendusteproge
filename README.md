@@ -1,5 +1,6 @@
 # rakendusteproge
 
-tere
+Simple E-commerce website built on React.js and MongoDB.
 
-https://kunterevert.herokuapp.com
+Registration/login system
+Cart system
